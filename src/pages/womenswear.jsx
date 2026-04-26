@@ -47,39 +47,42 @@ const outerWear = [
 ]
 const WomensWear = () => {
   return (
-     <div className='px-6 py-4'>
-    
-    <img src="https://shop.polymer-project.org/esm-bundled/images/ladies_outerwear.jpg" alt='womenswear'
-    className='h-70 ml-30 sm:hidden lg:block'
-    />
+     <div className='px-4 sm:px-6 lg:px-10 py-4'>
 
-    <h2 className='text-center mt-2'>Ladies Outerwear</h2>
-    <h2 className='text-center text-gray-500 mt-3'>6 items</h2>
+      <div className='w-full h-48 sm:h-64 lg:h-80 overflow-hidden rounded-md mb-4'>
+
+        <img src="https://shop.polymer-project.org/esm-bundled/images/ladies_outerwear.jpg"
+         alt='womenswear'
+         className='w-full h-full object-cover object-top'
+    />
+      </div>
+    
+    <h2 className='text-center text-lg font-semibold mt-2'>Ladies Outerwear</h2>
+    <h2 className='text-center text-gray-500 text-sm mt-1'>6 items</h2>
     
      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-8 mt-6">
         {outerWear.map((elem) => (
 
           <Link key={elem.id} to={`/product/${elem.id}`}>
           {/* have to add link individual card */}
 
-
-          <div  className="flex flex-col items-center text-center">
+          <div  className="flex flex-col items-center text-center hover:opacity-80 transition-opacity">
 
             {/* Image */}
             <img
               src={elem.url}
               alt={elem.Fname}
-              className="h-52 w-auto object-contain mb-4"
+              className="h-40 sm:h-48 w-auto object-contain mb-3"
             />
 
             {/* Name */}
-            <p className="font-bold text-gray-800 text-sm leading-snug">
+            <p className="font-semibold text-gray-800 text-xs sm:text-sm leading-snug">
               {elem.Fname} {elem.Lname && <br />} {elem.Lname}
             </p>
 
             {/* Price */}
-            <p className="text-gray-500 text-sm mt-1">{elem.price}</p>
+            <p className="text-gray-500 text-xs sm:text-sm mt-1">{elem.price}</p>
 
           </div>
           </Link>
