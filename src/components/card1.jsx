@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CardDetails from './carddesc'
 import {useDispatch} from 'react-redux'
-import { addToCart } from '../redux/slice'
+import { addToCart, hidePopup } from '../redux/slice'
 
 
 const Card1 = () => {
@@ -20,7 +20,10 @@ const Card1 = () => {
   return (
     <div>
     
-    <div className="flex flex-col md:flex-row mt-10 px-10 gap-10 max-w-5xl mx-auto">
+     <div 
+      className='bg-transparent'
+       onClick={()=>dispatch(hidePopup())}>
+    <div className="flex flex-col md:flex-row mt-10 px-10 gap-10 max-w-5xl mx-auto" >
       
        <div className="flex-1">
         <img
@@ -72,14 +75,18 @@ const Card1 = () => {
             {elem.feature4 && <li>{elem.feature4}</li>}
           </ul>
         </div>
+        
        
         <button 
-        onClick={()=>dispatch(addToCart(elem))}
+        onClick={(e)=>{
+          e.stopPropagation()
+          dispatch(addToCart(elem))
+        }}
         className="mt-8 w-full py-4 border-2 border-gray-800 text-gray-800
          text-sm tracking-widest font-medium active:bg-gray-800 active:text-white transition-colors duration-200 mb-10">
           ADD TO CART
         </button>
-        
+        </div>
 
       </div>
     </div>

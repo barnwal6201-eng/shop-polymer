@@ -10,6 +10,7 @@ import WomenTshirt from './pages/womens-tshirt'
 import CartPage from './pages/Cart';
 import Card1 from './components/card1';
 import Checkout from './pages/Checkout';
+import OrderPlaced from './components/placeorder';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path:'/checkout',
         element: <Checkout />
+      },
+      {
+        path:'/placed-order',
+        element: <OrderPlaced />
       }
   
 ])

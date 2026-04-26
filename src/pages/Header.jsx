@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { hidePopup } from '../redux/slice';
+import Loading from '../components/loader';
 
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation()
 
-  const isProductPage = location.pathname.includes('/product/') || location.pathname.includes('/checkout')
+  const isProductPage = location.pathname.includes('/product/')
 
   const cartSelector = useSelector((state)=>state.cart.items)
   console.log(cartSelector)
@@ -16,7 +17,19 @@ const Header = () => {
   const showPopup = useSelector((state) => state.cart.showPopup)
   const dispatch = useDispatch()
 
+  const [loading, setLoading] = useState(true)
+  
+
+  useEffect(()=> {
+    setLoading(true)
+    const timer = setTimeout(()=> setLoading(false), 1500)
+    return() => clearTimeout(timer)
+  },[location.pathname]);
+
   return (
+    <>
+     
+      {loading && <Loading/>}
     <div className='flex flex-col'>
      <div className=' flex items-center justify-between px-6 py-4'>
       
@@ -47,10 +60,10 @@ const Header = () => {
       </p>
       <div className='flex justify-around mt-6'>
         <Link to="/cart-page">
-        <button className='border h-8 w-20 cursor-pointer'>VIEWCART</button>
+        <button className='border h-8 w-20 cursor-pointer'onClick={()=> dispatch(hidePopup()) && navigate("/cart-page")}>VIEWCART</button>
         </Link>
        <Link t0="/checkout">
-       <button className='border h-8 w-20'>CHECKOUT</button>
+       <button className='border h-8 w-20' onClick={()=> dispatch(hidePopup()) && navigate("/checkout")}>CHECKOUT</button>
         </Link>
        </div>
     </div>:null  
@@ -75,6 +88,7 @@ const Header = () => {
       </Link>
       </div>
     </div>
+    </>
   )
 }
 

@@ -8,7 +8,6 @@ const CartPage = () => {
   const dispatch = useDispatch()
 
    
-
   return (
     <div className='max-w-4xl mx-auto px-6'>
       <Link to='/'>
@@ -25,8 +24,8 @@ const CartPage = () => {
       ) : (
         <>
           <div className='flex flex-col divide-y border-t border-b'>
-            {cartSelector.map((item, index) => (
-              <div key={index} className='flex items-center gap-4 py-4'>
+            {cartSelector.map((item) => (
+              <div key={item.id} className='flex items-center gap-4 py-4'>
                 
                 <img src={item.url} className='h-16 w-16 object-contain ' />
 
@@ -65,8 +64,7 @@ const CartPage = () => {
              ${cartSelector.reduce((sum, item) => {
               return sum + parseFloat(item.price.replace('$', '')) * (item.quantity || 1)
              }, 0).toFixed(2)
-             }
-                </span></p>
+             } </span></p>
 
             <Link to='/checkout'>
               <button className='border-2 border-gray-800 px-8 py-3 text-sm tracking-widest font-medium hover:bg-gray-800 hover:text-white transition-colors'>

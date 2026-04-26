@@ -27,10 +27,15 @@ const Cart= createSlice({
         const item = state.items.find(item=> item.id === action.payload.id)
         if(item) item.quantity = action.payload.quantity
         localStorage.setItem('cart', JSON.stringify(state.items) )
-     }
+     },
+
+     clearCart: (state) => {
+      state.items = [];
+      localStorage.removeItem('cart');
+     },
 
     }
 })
 
-export const {addToCart, hidePopup, removeFromCart, updateQuantity} = Cart.actions
+export const {addToCart, hidePopup, removeFromCart, updateQuantity, clearCart} = Cart.actions
 export default Cart.reducer
